@@ -2,8 +2,8 @@ using System;
 
 namespace Simulation.Entity
 {
-  public class Entity
-  {
-
-  }
+    public class Entity
+    {
+        
+    }
 }
