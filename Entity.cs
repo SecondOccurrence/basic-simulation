@@ -4,8 +4,8 @@ namespace Simulation.Entities
 {
     public class Entity
     {
-        public readonly char appearance = 'O';
-        public int[] position = {0,0};
+        private readonly char appearance = 'O';
+        private int[] position = {13,13};
 
         public int[] Move()
         {
@@ -13,6 +13,21 @@ namespace Simulation.Entities
             coord[0] = DetermineMove(position[0]);
             coord[1] = DetermineMove(position[1]);
             return coord;
+        }
+
+        public char GetAppearance()
+        {
+            return appearance;
+        }
+
+        public int[] GetPos()
+        {
+            return position;
+        }
+
+        public void SetPos(int[] newPosition)
+        {
+            position = newPosition;
         }
 
         private static int DetermineMove(int coord)
