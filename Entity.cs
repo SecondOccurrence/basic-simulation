@@ -19,13 +19,12 @@ namespace Simulation.Entities
         {
             int num;
             int chance = Chance();
-            if(chance < 50)
-            {
-                num = coord + 1;
-            }
+            if(coord <= 0){ num = coord + 1; }
+            else if(coord >=25){ num = coord - 1; }
             else
             {
-                num = coord - 1;
+                if(chance < 50){ num = coord + 1; }
+                else{ num = coord - 1; }
             }
             return num;
         }
