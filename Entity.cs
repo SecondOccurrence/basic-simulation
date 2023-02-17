@@ -2,7 +2,7 @@ using System;
 
 namespace Simulation.Entities
 {
-    public class Entity
+    public partial class Entity
     {
         private readonly char appearance = 'O';
         private int[] position = {13,13};

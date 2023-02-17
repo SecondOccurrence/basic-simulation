@@ -12,15 +12,22 @@ namespace Simulation
         {
             SimPlane plane = new();
             Entity entity = new();
+
             for(int i=0; i<10; i++)
             {
-                entity.SetPos(entity.Move());
-                plane.ChangePlaneCoord(entity.GetPos()[0], entity.GetPos()[1], entity.GetAppearance());
+                HandleEntity(entity, plane);
                 File.Delete("output/iteration_" + i + ".txt"); //delete previous file iterations
                 OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
                 plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
             }
-        } 
+        }
+
+        public static void HandleEntity(Entity entity, SimPlane plane)
+        {
+            entity.SetPos(entity.Move());
+            entity.SetLogCoord(entity.GetPos());
+            plane.ChangePlaneCoord(entity.GetPos()[0], entity.GetPos()[1], entity.GetAppearance());
+        }
 
         public static void OutputResult(string path, char[,] plane, int lim1, int lim2)
         {
