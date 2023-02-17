@@ -16,6 +16,7 @@ namespace Simulation
             {
                 entity.SetPos(entity.Move());
                 plane.ChangePlaneCoord(entity.GetPos()[0], entity.GetPos()[1], entity.GetAppearance());
+                File.Delete("output/iteration_" + i + ".txt"); //delete previous file iterations
                 OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
                 plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
             }
