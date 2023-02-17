@@ -12,7 +12,7 @@ namespace Simulation.Plane
 
         public SimPlane()
         {
-            area = CreatePlane(lim1, lim2);
+            area = GeneratePlane(lim1, lim2);
         }
 
         public int GetLim1()
@@ -30,12 +30,17 @@ namespace Simulation.Plane
             return area;
         }
 
+        public void SetPlane(char[,] newArea)
+        {
+            area = newArea;
+        }
+
         public void ChangePlaneCoord(int coord1, int coord2, char appearance)
         {
             area[coord1,coord2] = appearance;
         }
 
-        private static char[,] CreatePlane(int lim1, int lim2)
+        public char[,] GeneratePlane(int lim1, int lim2)
         {
             char[,] plane = new char[lim1,lim2];
             for(int i=0; i<lim1; i++)

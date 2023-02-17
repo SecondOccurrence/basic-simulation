@@ -8,18 +8,20 @@ namespace Simulation
 {
     public class SimManager
     {
-        readonly static string path = "output/fd.txt";
         public static void Main()
         {
             SimPlane plane = new();
             Entity entity = new();
-            entity.SetPos(entity.Move());
-            plane.ChangePlaneCoord(entity.GetPos()[0], entity.GetPos()[1], entity.GetAppearance());
-
-            OutputResult(plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
+            for(int i=0; i<10; i++)
+            {
+                entity.SetPos(entity.Move());
+                plane.ChangePlaneCoord(entity.GetPos()[0], entity.GetPos()[1], entity.GetAppearance());
+                OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
+                plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
+            }
         } 
 
-        public static void OutputResult(char[,] plane, int lim1, int lim2)
+        public static void OutputResult(string path, char[,] plane, int lim1, int lim2)
         {
             for(int i=0; i<lim1; i++)
             {
