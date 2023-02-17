@@ -9,11 +9,32 @@ namespace Simulation.Entities
 
         public int[] Move()
         {
-            Random rnd = new();
             int[] coord = new int[2];
-            coord[0] = rnd.Next(0,25);
-            coord[1] = rnd.Next(0,25);
+            coord[0] = DetermineMove(position[0]);
+            coord[1] = DetermineMove(position[1]);
             return coord;
+        }
+
+        private static int DetermineMove(int coord)
+        {
+            int num;
+            int chance = Chance();
+            if(chance < 50)
+            {
+                num = coord + 1;
+            }
+            else
+            {
+                num = coord - 1;
+            }
+            return num;
+        }
+
+        private static int Chance()
+        {
+            Random rnd = new();
+            int chance = rnd.Next(0,100);
+            return chance;
         }
     }
 }
