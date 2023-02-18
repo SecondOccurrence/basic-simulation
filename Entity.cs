@@ -38,8 +38,9 @@ namespace Simulation.Entities
             else if(coord >=25){ num = coord - 1; }
             else
             {
-                if(chance < 50){ num = coord + 1; }
-                else{ num = coord - 1; }
+                if(chance == 0){ num = coord + 1; }
+                else if(chance == 1){ num = coord - 1; }
+                else{ num = coord; }
             }
             return num;
         }
@@ -47,7 +48,7 @@ namespace Simulation.Entities
         private static int Chance()
         {
             Random rnd = new();
-            int chance = rnd.Next(0,100);
+            int chance = rnd.Next(0,3);
             return chance;
         }
     }
