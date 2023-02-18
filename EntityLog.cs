@@ -23,8 +23,11 @@ namespace Simulation.Entities
 
         public void SetLogCoord(int[] record)
         {
-            Console.WriteLine(record[0] + " " + record[1]);
             coordLog.Add(record);
+            if(coordLog.ToArray().Length >= 5)
+            {
+                coordLog.RemoveAt(0); //remove oldest position
+            }
         }
     }
 }
