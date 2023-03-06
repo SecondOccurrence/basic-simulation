@@ -20,18 +20,22 @@ namespace Simulation
                 OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
                 plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
             }
-            char choice = '0';
-            while(choice != 'e')
+            int iteration = 1;
+            int newChoice = 1;
+            while(iteration != 0)
             {
-                Console.WriteLine("Enter an iteration you wish to see or exit by typing 'e': ");
-                choice = Console.ReadKey().KeyChar;
+                Console.WriteLine("Enter an iteration (starting at 1) you wish to see or exit by typing '0': ");
+                iteration = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine();
-                if(choice != 'e')
+                if(iteration != 0)
                 {
-                    DisplayMenu(choice);
+                    newChoice = GetOption();
+                }
+                else
+                {
+                    Console.WriteLine("Program Closing");
                 }
             }
-
         }
 
         private static void HandleEntity(Entity entity, SimPlane plane)
@@ -61,34 +65,23 @@ namespace Simulation
             }
         }
 
-        private static void DisplayMenu(char choice)
+        private static int GetOption()
         {
-            char newChoice = '0';
-            while(newChoice != 'e')
+            int newChoice = '0';
+            bool isValid = false;
+            while(isValid == false)
             {
                 Console.WriteLine(@"Enter an option:
                 1 - Display Plane
-                2 - Get statistics of specific coordinate
-                e - Exit");
-                newChoice = Console.ReadKey().KeyChar;
+                2 - Get statistics of specific coordinate");
+                isValid = int.TryParse(Console.ReadLine(), out newChoice);
                 Console.WriteLine();
-                switch(newChoice)
+                if(isValid == false)
                 {
-                    case '1':
-                        DisplayPlane(choice);
-                        break;
-                    case '2':
-                        GetCoordStat(choice);
-                        break;
-                    case 'e':
-                    
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input, try again.");
-                        break;
+                    Console.WriteLine("Invalid number. Try again.");
                 }
             }
-
+            return newChoice;
         }
 
         private static string[] ReadPlane(char iteration)
@@ -117,6 +110,10 @@ namespace Simulation
                     break;
                 case 'O':
                     Console.WriteLine("Type: Entity");
+                    /**
+                        get past movements
+                        future statistics
+                    **/
                     break;
             }
         }
