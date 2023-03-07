@@ -13,7 +13,6 @@ namespace Simulation
             SimPlane plane = new();
             Entity entity = new();
             int iteration;
-
             Console.WriteLine("Enter the amount of iterations you wish to simulate:");
             iteration = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Simulating " + iteration + " iterations...");
@@ -21,15 +20,16 @@ namespace Simulation
             for(int i=0; i<iteration; i++)
             {
                 HandleEntity(entity, plane);
-                File.Delete("output/iteration_" + i + ".txt"); //delete previous file iterations
-                OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
+                File.Delete("output/iteration_" + (i+1) + ".txt"); //delete previous file iterations
+                OutputResult("output/iteration_" + (i+1) + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
                 plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
+                Console.Write("\r" + (i+1) + " / " + iteration);
             }
             int iterationSearch = 1;
             int choice;
             while(iterationSearch != 0)
             {
-                Console.WriteLine("Enter an iteration (starting at 1) you wish to see or exit by typing '0': ");
+                Console.WriteLine("\nEnter an iteration (starting at 1) you wish to see or exit by typing '0': ");
                 iterationSearch = Convert.ToInt32(Console.ReadLine());
                 if((iterationSearch < 0) || (iterationSearch > iteration))
                 {
