@@ -18,7 +18,7 @@ namespace Simulation
             iteration = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Simulating " + iteration + " iterations...");
 
-            for(int i=0; i<10; i++)
+            for(int i=0; i<iteration; i++)
             {
                 HandleEntity(entity, plane);
                 File.Delete("output/iteration_" + i + ".txt"); //delete previous file iterations
