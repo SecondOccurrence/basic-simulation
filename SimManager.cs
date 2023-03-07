@@ -12,6 +12,11 @@ namespace Simulation
         {
             SimPlane plane = new();
             Entity entity = new();
+            int iteration;
+
+            Console.WriteLine("Enter the amount of iterations you wish to simulate:");
+            iteration = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Simulating " + iteration + " iterations...");
 
             for(int i=0; i<10; i++)
             {
@@ -20,16 +25,24 @@ namespace Simulation
                 OutputResult("output/iteration_" + i + ".txt", plane.GetPlane(), plane.GetLim1(), plane.GetLim2());
                 plane.SetPlane(plane.GeneratePlane(plane.GetLim1(), plane.GetLim2()));
             }
-            int iteration = 1;
-            int newChoice = 1;
-            while(iteration != 0)
+            int iterationSearch = 1;
+            int choice;
+            while(iterationSearch != 0)
             {
                 Console.WriteLine("Enter an iteration (starting at 1) you wish to see or exit by typing '0': ");
-                iteration = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine();
-                if(iteration != 0)
+                iterationSearch = Convert.ToInt32(Console.ReadLine());
+                if((iterationSearch < 0) || (iterationSearch > iteration))
                 {
-                    newChoice = GetOption();
+                    Console.WriteLine("Number entered exceeds the amount of iterations simulated. Try again.");
+                    continue;
+                }
+                if(iterationSearch != 0)
+                {
+                    choice = GetOption();
+                    if(choice == 1)
+                    {
+                        DisplayPlane(iterationSearch);
+                    }
                 }
                 else
                 {
@@ -84,19 +97,19 @@ namespace Simulation
             return newChoice;
         }
 
-        private static string[] ReadPlane(char iteration)
-        {
-            string[] lines = File.ReadAllLines("output/iteration_" + iteration + ".txt"); //separated by each line
-            return lines;
-        }
-
-        private static void DisplayPlane(char iteration)
+        private static void DisplayPlane(int iteration)
         {
             string[] lines = ReadPlane(iteration);
             foreach(var line in lines)
             {
                 Console.WriteLine(line);
             }
+        }
+
+        private static string[] ReadPlane(int iteration)
+        {
+            string[] lines = File.ReadAllLines("output/iteration_" + iteration + ".txt"); //separated by each line
+            return lines;
         }
 
         private static void GetCoordStat(char iteration)
